@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JEE Main CBT Practice Test - Vector Algebra & 3D Geometry</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#eef1f5;color:#17202a}
+.top{height:64px;background:#1d3557;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 18px;position:sticky;top:0;z-index:20}
+.brand{font-size:18px;font-weight:700}.timer{background:#10233e;padding:10px 16px;border-radius:6px;font-size:22px;font-weight:700;min-width:105px;text-align:center}
+.wrap{max-width:1400px;margin:18px auto;padding:0 14px}.panel,.qcard{background:#fff;border:1px solid #d8dde5;border-radius:8px;box-shadow:0 2px 7px #00000012;padding:20px}
+.hidden{display:none!important}.muted{color:#5d6673}
+input[type=text]{width:100%;padding:12px;border:1px solid #bfc7d2;border-radius:5px;font-size:16px}
+.startGrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:720px}
+.btn{border:0;border-radius:5px;padding:11px 18px;font-weight:700;cursor:pointer}.primary{background:#1769aa;color:#fff}.green{background:#198754;color:#fff}.gray{background:#e9edf2;color:#17202a}
+.instructions li{margin:8px 0;line-height:1.5}.examGrid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:16px}
+.qcard{min-height:510px}.qbar{display:flex;justify-content:space-between;border-bottom:1px solid #e0e4e8;padding-bottom:12px;margin-bottom:16px}
+.qtext{font-size:18px;line-height:1.7;white-space:pre-wrap}.option{display:block;border:1px solid #ccd3db;padding:13px;margin:10px 0;border-radius:6px;cursor:pointer}
+.option:hover{background:#f5f8fb}.option input{margin-right:10px}.numInput{width:260px;padding:12px;font-size:17px;border:1px solid #aaa;border-radius:5px}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:20px}
+.palette{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.p{padding:9px 0;border:0;border-radius:5px;cursor:pointer;background:#e5e9ee}.p.ans{background:#38a169;color:#fff}.p.cur{outline:3px solid #1769aa}
+.status{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px;margin-top:12px}.box{padding:8px;border-radius:4px;background:#f1f3f5}
+.warning{background:#fff3cd;border:1px solid #ffdf85;padding:12px;border-radius:6px}
+.resultScore{font-size:36px;font-weight:800;color:#1769aa}.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.stat{background:#f3f5f7;padding:13px;border-radius:6px}
+.responseRow{border:1px solid #dfe3e8;padding:12px;margin:8px 0;border-radius:6px}.correct{border-left:5px solid #198754}.wrong{border-left:5px solid #dc3545}.skip{border-left:5px solid #6c757d}
+.solution{background:#fafafa;border-left:4px solid #1769aa;padding:13px;white-space:pre-wrap;line-height:1.65}
+#solutions{display:none}
+@media(max-width:900px){.examGrid{grid-template-columns:1fr}.startGrid,.stats{grid-template-columns:1fr 1fr}.top{position:static}}
+</style>
+</head>
+<body>
+
+<div id="start">
+<div class="wrap">
+<div class="panel">
+<h1>JEE Main CBT Practice Test</h1>
+<p><b>Mathematics: Vector Algebra + Three Dimensional Geometry</b></p>
+<p class="muted">25 questions · 70 minutes · Maximum marks: 100</p>
+<div class="startGrid">
+<div><label><b>Student Name</b></label><input id="studentName" type="text" placeholder="Enter your full name"></div>
+<div><label><b>Class</b></label><input id="studentClass" type="text" placeholder="e.g. Class 11 / Class 12"></div>
+</div><br>
+<div class="warning"><b>Before you begin:</b> Enter your name and class. Your score and solutions become available only after submission.</div>
+<h2>Instructions</h2>
+<ol class="instructions">
+<li>Total questions: <b>25</b>. Maximum marks: <b>100</b>.</li>
+<li>Time allowed for this practice CBT: <b>70 minutes</b>.</li>
+<li>Each correct answer carries <b>+4 marks</b>.</li>
+<li>Each incorrect answer carries <b>−1 mark</b>.</li>
+<li>An unattempted question carries <b>0 marks</b>.</li>
+<li>Use the question palette to move directly between questions.</li>
+<li>The timer continues while you navigate through the test.</li>
+<li>When the timer reaches zero, the test is submitted automatically.</li>
+<li>After submission, your score and response analysis are shown first. Detailed solutions are available through the button below.</li>
+</ol>
+<button class="btn primary" onclick="startTest()">Start Test</button>
+</div></div></div>
+
+<div id="exam" class="hidden">
+<div class="top"><div class="brand">JEE Main CBT · Vector Algebra + 3D Geometry</div><div id="timer" class="timer">70:00</div></div>
+<div class="wrap"><div class="examGrid">
+<div id="question"></div>
+<div>
+<div class="panel">
+<h3>Question Palette</h3><div id="palette" class="palette"></div>
+<div class="status"><div class="box">🟩 Answered</div><div class="box">⬜ Not Answered</div></div>
+<hr>
+<p><b>Candidate:</b> <span id="candidate"></span></p>
+<p><b>Class:</b> <span id="classShow"></span></p>
+<button class="btn green" style="width:100%" onclick="submitTest(false)">Submit Test</button>
+</div></div>
+</div></div></div>
+
+<div id="result" class="hidden">
+<div class="top"><div class="brand">CBT Result</div><div>Test Completed</div></div>
+<div class="wrap">
+<div class="panel">
+<h2 id="resultTitle"></h2><div id="score" class="resultScore"></div><div id="stats" class="stats"></div>
+</div><br>
+<div class="panel"><h2>Your Responses</h2><div id="responses"></div></div><br>
+<div class="panel">
+<h2>Detailed Solutions</h2>
+<p class="muted">Click the button to reveal all detailed solutions.</p>
+<button class="btn primary" onclick="document.getElementById('solutions').style.display='block';this.style.display='none'">View Detailed Solutions</button>
+<div id="solutions"></div>
+</div>
+</div></div>
+
+<script>
+const questions=[
+{"id":1,"topic":"Vector Algebra","type":"MCQ","q":"Let a = 2i − j + 2k and b = i + 2j + 2k. If θ is the angle between a and b, then cos θ is:","opts":["4/9","5/9","1/3","2/3"],"ans":"A","sol":"a·b = 2(1) + (−1)(2) + 2(2) = 4. |a| = 3 and |b| = 3. Therefore cos θ = 4/9."},
+{"id":2,"topic":"Vector Algebra","type":"MCQ","q":"The scalar projection of a = 3i + 4j on b = i + j is:","opts":["7/√2","5/√2","7√2","1/√2"],"ans":"A","sol":"Scalar projection = (a·b)/|b| = (3+4)/√2 = 7/√2."},
+{"id":3,"topic":"Vector Algebra","type":"MCQ","q":"A unit vector perpendicular to both a = i + j and b = i + k is:","opts":["(i−j−k)/√3","(i+j+k)/√3","(i−j+k)/√3","(−i−j+k)/√3"],"ans":"A","sol":"a×b = i−j−k. Its magnitude is √3, hence a unit vector is (i−j−k)/√3."},
+{"id":4,"topic":"Vector Algebra","type":"MCQ","q":"If the vectors i+2j+3k, 2i−j+k and λi+3j+4k are coplanar, then λ equals:","opts":["0","1","2","3"],"ans":"B","sol":"For coplanarity, the scalar triple product is zero: |1 2 3; 2 −1 1; λ 3 4| = 0. This gives λ = 1."},
+{"id":5,"topic":"Vector Algebra","type":"MCQ","q":"The area of the triangle with vertices A(1,0,0), B(0,1,0), C(0,0,1) is:","opts":["√3","√3/2","3/2","3√3"],"ans":"B","sol":"AB=(−1,1,0), AC=(−1,0,1). Area = 1/2 |AB×AC| = √3/2."},
+{"id":6,"topic":"Vector Algebra","type":"MCQ","q":"If |a+b|=√13, |a−b|=√5 and |a|=2, then the angle θ between a and b satisfies:","opts":["1/√5","2/√5","1/2","1/√2"],"ans":"A","sol":"13−5=4a·b, so a·b=2. Also 13+5=2(|a|²+|b|²), giving |b|=√5. Thus cosθ=2/(2√5)=1/√5."},
+{"id":7,"topic":"Vector Algebra","type":"MCQ","q":"Let a=i+k, b=i+2j and c=j+k. Then a×(b×c) is:","opts":["i+j−k","i−j+k","−i+j+k","i+j+k"],"ans":"A","sol":"Using a×(b×c)=b(a·c)−c(a·b), we get b−c=i+j−k."},
+{"id":8,"topic":"Vector Algebra","type":"MCQ","q":"The scalar component of a=2i−j+2k along b=i+2j+2k is:","opts":["4/3","2/3","4","4/9"],"ans":"A","sol":"Scalar component = (a·b)/|b| = 4/3."},
+{"id":9,"topic":"Vector Algebra","type":"MCQ","q":"If |a|=3, |b|=4 and a·b=6, then |a×b| is:","opts":["6√3","3√3","6","12"],"ans":"A","sol":"|a×b|²=|a|²|b|²−(a·b)²=144−36=108, so |a×b|=6√3."},
+{"id":10,"topic":"Vector Algebra","type":"MCQ","q":"If (a+b)·(a−b)=0, then:","opts":["a ⟂ b","|a|=|b|","a=b","a=−b"],"ans":"B","sol":"Expansion gives a·a−b·b=0, hence |a|=|b|."},
+{"id":11,"topic":"Vector Algebra","type":"MCQ","q":"The point P divides A(2,−1,3) and B(5,2,−3) internally in the ratio AP:PB=2:1. The position vector of P is:","opts":["4i+j−k","3i+j−k","4i−j+k","i+4j−k"],"ans":"A","sol":"By section formula P=(A+2B)/3=(4,1,−1). Hence P=4i+j−k."},
+{"id":12,"topic":"Vector Algebra","type":"MCQ","q":"The vectors (1,2,3), (2,3,4), (3,5,λ) are linearly dependent. Then λ is:","opts":["5","6","7","8"],"ans":"C","sol":"Linear dependence requires the determinant to be zero. Expanding gives λ−7=0, hence λ=7."},
+{"id":13,"topic":"Vector Algebra","type":"MCQ","q":"The volume of the parallelepiped formed by a=(1,2,0), b=(0,1,2), c=(2,0,1) is:","opts":["3","6","9","12"],"ans":"C","sol":"Volume = |a·(b×c)| = |det[a,b,c]| = 9."},
+{"id":14,"topic":"3D Geometry","type":"MCQ","q":"The equation of the line through A(1,2,−1) and B(3,−1,2) is:","opts":["(x−1)/2=(y−2)/(−3)=(z+1)/3","(x−1)/3=(y−2)/(−2)=(z+1)/3","(x+1)/2=(y−2)/3=(z−1)/3","(x−1)/2=(y+2)/(−3)=(z−1)/3"],"ans":"A","sol":"Direction ratios AB=(2,−3,3). Therefore (x−1)/2=(y−2)/(−3)=(z+1)/3."},
+{"id":15,"topic":"3D Geometry","type":"MCQ","q":"The angle between two lines having direction ratios (1,2,2) and (2,1,−2) is:","opts":["30°","45°","60°","90°"],"ans":"D","sol":"Dot product = 2+2−4=0, so the lines are perpendicular and the angle is 90°."},
+{"id":16,"topic":"3D Geometry","type":"MCQ","q":"The plane through (1,−2,3) and perpendicular to 2i−j+2k has equation:","opts":["2x−y+2z−10=0","2x+y+2z−10=0","x−2y+2z−11=0","2x−y+z−7=0"],"ans":"A","sol":"Normal vector is (2,−1,2). Hence 2(x−1)−(y+2)+2(z−3)=0, giving 2x−y+2z−10=0."},
+{"id":17,"topic":"3D Geometry","type":"MCQ","q":"The perpendicular distance of (1,2,3) from 2x−y+2z−9=0 is:","opts":["1","2","3","1/3"],"ans":"A","sol":"Distance = |2−2+6−9|/√9 = 3/3 = 1."},
+{"id":18,"topic":"3D Geometry","type":"MCQ","q":"A line has direction ratios (1,2,2). The plane 2x−y+2z+5=0 makes angle θ with the line. Then:","opts":["sinθ=4/9","cosθ=4/9","sinθ=5/9","cosθ=5/9"],"ans":"A","sol":"For a line and plane, sinθ=|d·n|/(|d||n|). Here d·n=4 and both magnitudes are 3, so sinθ=4/9."},
+{"id":19,"topic":"3D Geometry","type":"MCQ","q":"The line x=1+t, y=2−t, z=3+2t intersects the plane x+y+z=8 at:","opts":["(1,2,3)","(2,1,5)","(3,0,4)","(2,2,4)"],"ans":"B","sol":"Substitution gives 6+2t=8, hence t=1 and the point is (2,1,5)."},
+{"id":20,"topic":"3D Geometry","type":"MCQ","q":"The distance between the parallel planes 2x−2y+z−3=0 and 4x−4y+2z+6=0 is:","opts":["1","2","3","6"],"ans":"B","sol":"Divide the second equation by 2: 2x−2y+z+3=0. Distance = |−3−3|/3 = 2."},
+{"id":21,"topic":"3D Geometry","type":"NUM","q":"Find k if the plane through A(1,0,0), B(0,1,0), C(0,0,1) has equation x+y+z=k.","ans":"1","sol":"Using A(1,0,0), x+y+z=1. Therefore k=1."},
+{"id":22,"topic":"3D Geometry","type":"NUM","q":"Find the perpendicular distance of P(1,2,3) from the line r=(0,1,1)+λ(i+j).","ans":"2","sol":"Take A=(0,1,1), d=(1,1,0), AP=(1,1,2). Distance = |AP×d|/|d| = 2."},
+{"id":23,"topic":"3D Geometry","type":"NUM","q":"Find the shortest distance between r=(1,0,0)+λ(i+j) and r=(0,1,1)+μ(i−j+k).","ans":"2√6/3","sol":"Using the skew-line formula, d = |(A2−A1)·(d1×d2)|/|d1×d2| = 4/√6 = 2√6/3."},
+{"id":24,"topic":"3D Geometry","type":"NUM","q":"Find the distance of the origin from the plane 2x+3y+6z=14.","ans":"2","sol":"Distance = 14/√(2²+3²+6²)=14/7=2."},
+{"id":25,"topic":"3D Geometry","type":"NUM","q":"The foot of the perpendicular from P(1,2,3) to the plane x+2y+2z=9 is H(x,y,z). Find 9(x+y+z).","ans":"44","sol":"For plane x+2y+2z−9=0, the normal is (1,2,2). The plane expression at P is 2 and |n|²=9. H=P−(2/9)n=(7/9,14/9,23/9). Hence 9(x+y+z)=44."}
+];
+
+let current=0, remaining=4200, submitted=false, timerId=null;
+const answers={}; let studentName="", studentClass="";
+
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));}
+function startTest(){
+ studentName=document.getElementById('studentName').value.trim();
+ studentClass=document.getElementById('studentClass').value.trim();
+ if(!studentName||!studentClass){alert('Please enter Student Name and Class before starting the test.');return;}
+ document.getElementById('start').classList.add('hidden'); document.getElementById('exam').classList.remove('hidden');
+ document.getElementById('candidate').textContent=studentName; document.getElementById('classShow').textContent=studentClass;
+ renderQuestion(); timerId=setInterval(tick,1000);
+}
+function saveAnswer(){
+ const q=questions[current];
+ if(q.type==='MCQ'){const el=document.querySelector('input[name="q'+q.id+'"]:checked'); if(el) answers[q.id]=el.value;}
+ else {const el=document.getElementById('num'); if(el) answers[q.id]=el.value.trim();}
+ updatePalette();
+}
+function renderQuestion(){
+ const q=questions[current]; let s='<div class="qcard">';
+ s+='<div class="qbar"><b>Question '+q.id+' of 25</b><span>'+esc(q.topic)+' · '+q.type+'</span></div>';
+ s+='<div class="qtext">'+esc(q.q)+'</div><br>';
+ if(q.type==='MCQ'){q.opts.forEach((o,i)=>{const letter=String.fromCharCode(65+i);s+='<label class="option"><input type="radio" name="q'+q.id+'" value="'+letter+'" '+(answers[q.id]===letter?'checked':'')+' onchange="saveAnswer()"> <b>'+letter+'.</b> '+esc(o)+'</label>';});}
+ else{s+='<label><b>Enter your numerical answer:</b></label><br><br><input id="num" class="numInput" type="text" value="'+esc(answers[q.id]||'')+'" oninput="saveAnswer()" placeholder="Enter answer">';}
+ s+='<div class="nav"><button class="btn gray" onclick="previous()">Previous</button><button class="btn primary" onclick="next()">Save & Next</button></div></div>';
+ document.getElementById('question').innerHTML=s; updatePalette();
+}
+function next(){saveAnswer();if(current<24){current++;renderQuestion();}}
+function previous(){saveAnswer();if(current>0){current--;renderQuestion();}}
+function updatePalette(){document.getElementById('palette').innerHTML=questions.map((q,i)=>'<button class="p '+(answers[q.id]!==undefined&&answers[q.id]!==''?'ans ':'')+(i===current?'cur':'')+'" onclick="saveAnswer();current='+i+';renderQuestion()">'+q.id+'</button>').join('');}
+function normalize(v){return String(v||'').trim().replace(/\s+/g,'').toLowerCase();}
+function tick(){
+ remaining--; document.getElementById('timer').textContent=Math.floor(remaining/60).toString().padStart(2,'0')+':'+(remaining%60).toString().padStart(2,'0');
+ if(remaining<=0) submitTest(true);
+}
+function submitTest(auto){
+ if(submitted)return; saveAnswer();
+ if(!auto&&!confirm('Are you sure you want to submit the test? After submission, answers cannot be changed.'))return;
+ submitted=true;clearInterval(timerId);
+ let correct=0,wrong=0,unattempted=0;
+ questions.forEach(q=>{const r=answers[q.id];if(r===undefined||String(r).trim()==='')unattempted++;else if(normalize(r)===normalize(q.ans))correct++;else wrong++;});
+ const score=correct*4-wrong;
+ const used=4200-remaining,mins=Math.floor(used/60),secs=used%60;
+ document.getElementById('exam').classList.add('hidden');document.getElementById('result').classList.remove('hidden');
+ document.getElementById('resultTitle').textContent=studentName+' — Test Result';
+ document.getElementById('score').textContent=score+' / 100';
+ document.getElementById('stats').innerHTML='<div class="stat"><b>Correct</b><br>'+correct+'</div><div class="stat"><b>Wrong</b><br>'+wrong+'</div><div class="stat"><b>Unattempted</b><br>'+unattempted+'</div><div class="stat"><b>Attempted</b><br>'+(correct+wrong)+'</div><div class="stat"><b>Time Used</b><br>'+mins+'m '+secs+'s</div>';
+ document.getElementById('responses').innerHTML=questions.map(q=>{
+  const r=answers[q.id]===undefined||answers[q.id]===''?'Not Attempted':answers[q.id],ok=normalize(r)===normalize(q.ans);
+  const cls=r==='Not Attempted'?'skip':(ok?'correct':'wrong');
+  return '<div class="responseRow '+cls+'"><b>Q'+q.id+'</b> · '+esc(q.topic)+'<br>Your response: <b>'+esc(r)+'</b><br>Correct answer: <b>'+esc(q.ans)+'</b><br>Status: <b>'+(r==='Not Attempted'?'Not Attempted':(ok?'Correct':'Wrong'))+'</b></div>';
+ }).join('');
+ document.getElementById('solutions').innerHTML=questions.map(q=>'<div class="responseRow"><h3>Q'+q.id+' — '+esc(q.topic)+'</h3><div class="solution">'+esc(q.sol)+'</div></div>').join('');
+ window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>
